@@ -1,41 +1,58 @@
+// src/componentes/container/PlantManager.jsx
 import React, { useState } from 'react';
-import PlantCard from '../presentation/PlantCard'; // Importa o Presenter!
+import PlantCard from '../presentation/PlantCard';
+import AddPlantForm from '../presentation/AddPlantForm'; 
+import CardWrapper from '../presentation/CardWrapper';
 
-// 1. Este componente é o CONTAINER (Inteligente).
-// Ele cuida da LÓGICA DE NEGÓCIO e do ESTADO central do viveiro.
-const PlantManager = () => {
-  const [plantas, setPlantas] = useState([
-    { id: 1, nome: 'Pé de Alface', especie: 'Lactuca sativa', watered: false },
-    { id: 2, nome: 'Tomate Cereja', especie: 'Solanum lycopersicum', watered: true },
-    { id: 3, nome: 'Cacto Mandacaru', especie: 'Cereus jamacaru', watered: false },
-  ]);
+const PlantManager = ({ profile }) => {
+  
+  const isDono = profile === 'Dono'; 
+  
+  // ESTADO INICIAL VAZIO (Sem plantas pré-cadastradas)
+  const [plantas, setPlantas] = useState([]);
 
-  // Lógica para Regar (Demonstra Imutabilidade: cria um NOVO array)
-  const handleToggleWatered = (id) => {
-    setPlantas(plantas.map(p =>
-      p.id === id ? { ...p, watered: !p.watered } : p
-    ));
+  // Lógica de ADIÇÃO
+  const handleAddPlant = (nome, especie) => {
+    const newPlant = {
+      id: Date.now(),
+      nome,
+      especie
+    };
+    setPlantas([...plantas, newPlant]);
   };
   
-  // (Futuramente, Adicionaremos o handleAddPlant aqui)
+  // Função para voltar ao menu
+  const handleGoBack = () => {
+    window.location.reload(); 
+  };
 
   return (
-    <div className="plant-manager" style={{ padding: '20px' }}>
-      <h1>🌱 Viveiro Digital (Container Principal)</h1>
-      <p>Demonstração do Padrão Container/Presenter:</p>
+    <div className="plant-manager" style={{ padding: '20px', minHeight: '100vh' }}>
+      <button onClick={handleGoBack} style={{ marginBottom: '20px', padding: '10px', cursor: 'pointer', background: '#ccc', border: 'none', borderRadius: '4px' }}>
+        ← Voltar para Seleção
+      </button>
 
-      {/* 2. O Container renderiza os Presenters e passa dados/funções via props */}
-      {plantas.map(planta => (
-        <PlantCard
-          key={planta.id}
-          id={planta.id}
-          nome={planta.nome}
-          especie={planta.especie}
-          watered={planta.watered}
-          // Passando a função de LÓGICA como prop para o Presenter:
-          onToggleWatered={handleToggleWatered} 
-        />
-      ))}
+      <h1>💚 Viveiro Digital - Perfil: {profile}</h1>
+      
+      {/* Se for DONO, mostra o formulário de adicionar */}
+      {isDono && (
+        <CardWrapper title="Adicionar Nova Planta">
+          <AddPlantForm onAddPlant={handleAddPlant} /> 
+        </CardWrapper>
+      )}
+      
+      {/* Lista de Plantas (Começa vazia e enche conforme você adiciona) */}
+      <CardWrapper title={`Catálogo de Plantas (${plantas.length} Espécies):`}>
+        {plantas.length === 0 && <p style={{textAlign: 'center', color: '#888'}}>Nenhuma planta cadastrada ainda.</p>}
+        
+        {plantas.map(planta => (
+          <PlantCard
+            key={planta.id}
+            nome={planta.nome}
+            especie={planta.especie}
+          />
+        ))}
+      </CardWrapper>
     </div>
   );
 };
