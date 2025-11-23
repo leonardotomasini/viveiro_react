@@ -1,9 +1,7 @@
-// CÓDIGO COMPLETO PARA src/componentes/presentation/AddPlantForm.jsx
+// src/componentes/presentation/AddPlantForm.jsx
 import React, { useState } from 'react';
 
-// Comentário: O Presenter recebe a função de LÓGICA 'onAddPlant' como prop do Container.
 const AddPlantForm = ({ onAddPlant }) => {
-  // Estado local (da UI) para gerenciar os inputs do formulário
   const [nome, setNome] = useState('');
   const [especie, setEspecie] = useState('');
   
@@ -11,41 +9,54 @@ const AddPlantForm = ({ onAddPlant }) => {
     e.preventDefault();
     if (!nome || !especie) return;
 
-    // CHAMA a função de LÓGICA que veio do Container via prop
     onAddPlant(nome, especie); 
-
-    // Limpa os inputs (lógica local da UI)
     setNome('');
     setEspecie('');
   };
 
+  // Estilo para os inputs: Fundo ESCURO e Letra BRANCA
+  const inputStyle = {
+    padding: '12px',
+    borderRadius: '6px',
+    border: '1px solid #555',
+    backgroundColor: '#333', // Fundo escuro
+    color: '#ffffff',        // Letra branca (digitada)
+    fontSize: '16px',
+    outline: 'none'
+  };
+
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px', maxWidth: '400px', margin: '10px auto' }}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px', maxWidth: '500px', margin: '10px auto' }}>
       
-      <input
-        type="text"
-        placeholder="Nome da Planta (Ex: Rosa)"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
-        style={{ padding: '10px', borderRadius: '4px', border: '1px solid #ccc', color: '#333' }}
-      />
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <label style={{ color: '#333', marginBottom: '5px', fontWeight: 'bold' }}>Nome:</label>
+        <input
+          type="text"
+          placeholder="Ex: Rosa"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+          style={inputStyle}
+        />
+      </div>
       
-      <input
-        type="text"
-        placeholder="Espécie (Ex: Rosa rubiginosa)"
-        value={especie}
-        onChange={(e) => setEspecie(e.target.value)}
-        style={{ padding: '10px', borderRadius: '4px', border: '1px solid #ccc', color: '#333' }}
-      />
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <label style={{ color: '#333', marginBottom: '5px', fontWeight: 'bold' }}>Espécie:</label>
+        <input
+          type="text"
+          placeholder="Ex: Rosa rubiginosa"
+          value={especie}
+          onChange={(e) => setEspecie(e.target.value)}
+          style={inputStyle}
+        />
+      </div>
       
       <button 
         type="submit"
-        style={{ padding: '12px', background: '#4CAF50', color: 'white', border: 'none', cursor: 'pointer', borderRadius: '4px' }}
+        style={{ padding: '12px', background: '#2e7d32', color: 'white', border: 'none', cursor: 'pointer', borderRadius: '6px', fontSize: '16px', fontWeight: 'bold', marginTop: '10px' }}
       >
         Adicionar Nova Espécie
       </button>
       
-      {/* Comentário: O Presenter coleta os dados e os envia ao Container via callback prop. */}
     </form>
   );
 };

@@ -8,7 +8,7 @@ const PlantManager = ({ profile }) => {
   
   const isDono = profile === 'Dono'; 
   
-  // ESTADO INICIAL VAZIO (Sem plantas pré-cadastradas)
+  // ESTADO INICIAL VAZIO
   const [plantas, setPlantas] = useState([]);
 
   // Lógica de ADIÇÃO
@@ -21,29 +21,33 @@ const PlantManager = ({ profile }) => {
     setPlantas([...plantas, newPlant]);
   };
   
-  // Função para voltar ao menu
+  // Função para voltar
   const handleGoBack = () => {
     window.location.reload(); 
   };
 
   return (
-    <div className="plant-manager" style={{ padding: '20px', minHeight: '100vh' }}>
-      <button onClick={handleGoBack} style={{ marginBottom: '20px', padding: '10px', cursor: 'pointer', background: '#ccc', border: 'none', borderRadius: '4px' }}>
-        ← Voltar para Seleção
+    <div className="plant-manager" style={{ padding: '20px', minHeight: '100vh', backgroundColor: '#f0fff0' }}>
+      
+      <button onClick={handleGoBack} style={{ marginBottom: '20px', padding: '10px 15px', cursor: 'pointer', background: '#555', color: 'white', border: 'none', borderRadius: '4px' }}>
+        ← Voltar
       </button>
 
-      <h1>💚 Viveiro Digital - Perfil: {profile}</h1>
+      {/* CORRIGIDO: Cor do título preta para leitura */}
+      <h1 style={{ color: '#000', textAlign: 'center', marginBottom: '30px' }}>
+         Viveiro Digital - Perfil: {profile}
+      </h1>
       
-      {/* Se for DONO, mostra o formulário de adicionar */}
+      {/* Se for DONO, mostra o formulário */}
       {isDono && (
         <CardWrapper title="Adicionar Nova Planta">
           <AddPlantForm onAddPlant={handleAddPlant} /> 
         </CardWrapper>
       )}
       
-      {/* Lista de Plantas (Começa vazia e enche conforme você adiciona) */}
+      {/* Lista de Plantas */}
       <CardWrapper title={`Catálogo de Plantas (${plantas.length} Espécies):`}>
-        {plantas.length === 0 && <p style={{textAlign: 'center', color: '#888'}}>Nenhuma planta cadastrada ainda.</p>}
+        {plantas.length === 0 && <p style={{textAlign: 'center', color: '#666'}}>Nenhuma planta cadastrada ainda.</p>}
         
         {plantas.map(planta => (
           <PlantCard
