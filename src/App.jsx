@@ -1,34 +1,32 @@
-// CÓDIGO COMPLETO PARA src/App.jsx
 import React, { useState } from 'react';
-import PlantManager from './componentes/container/PlantManager';
-import ProfileSelector from './componentes/presentation/ProfileSelector';
-// Não precisa importar index.css/App.css aqui, pois já estão no main.jsx
+import SeletorPerfil from './componentes/presentation/SeletorPerfil';
+import GerenciadorPlantas from './componentes/container/GerenciadorPlantas';
+import './index.css';
+import './App.css';
 
 function App() {
   // Estado que guarda o perfil selecionado: null, 'Dono', ou 'Visitante'
-  const [profile, setProfile] = useState(null); 
+  const [perfil, setPerfil] = useState(null); 
 
   // Função passada para o seletor para mudar o estado
-  const handleSelectProfile = (selectedProfile) => {
-    setProfile(selectedProfile);
+  const aoSelecionarPerfil = (perfilSelecionado) => {
+    setPerfil(perfilSelecionado);
   };
 
-  let content;
+  let conteudo;
 
-  if (profile === null) {
-    // Se profile for null, mostra a tela de escolha
-    content = <ProfileSelector onSelectProfile={handleSelectProfile} />;
+  if (perfil === null) {
+    // Se perfil for null, mostra a tela de escolha
+    conteudo = <SeletorPerfil aoSelecionarPerfil={aoSelecionarPerfil} />;
   
   } else {
-    // Se profile for 'Dono' ou 'Visitante', mostra o Viveiro
-    // Passamos o perfil como prop para o PlantManager
-    content = <PlantManager profile={profile} />; 
+    // Se perfil for 'Dono' ou 'Visitante', mostra o Viveiro
+    conteudo = <GerenciadorPlantas perfil={perfil} />; 
   }
 
   return (
-    // Adiciona um estilo básico para garantir a cor de fundo e altura mínima (solução para o fundo escuro)
     <div className="App" style={{ backgroundColor: '#f0fff0', minHeight: '100vh' }}>
-      {content}
+      {conteudo}
     </div>
   );
 }

@@ -1,39 +1,36 @@
-// src/componentes/presentation/AddPlantForm.jsx
 import React, { useState } from 'react';
 
-const AddPlantForm = ({ onAddPlant }) => {
+const FormularioAdicionar = ({ aoAdicionarPlanta }) => {
   const [nome, setNome] = useState('');
   const [especie, setEspecie] = useState('');
-  const [sobre, setSobre] = useState(''); // NOVO: Descrição
+  const [sobre, setSobre] = useState('');
   const [foto, setFoto] = useState('');
   
-  const handleSubmit = (e) => {
+  const lidarComEnvio = (e) => {
     e.preventDefault();
     if (!nome || !especie) return;
 
-    // Envia todos os dados, incluindo a descrição
-    onAddPlant(nome, especie, foto, sobre); 
+    aoAdicionarPlanta(nome, especie, foto, sobre); 
     
-    // Limpa tudo
     setNome('');
     setEspecie('');
     setSobre('');
     setFoto('');
-    document.getElementById('fileInput').value = "";
+    document.getElementById('inputArquivo').value = "";
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFoto(reader.result);
+  const lidarComArquivo = (e) => {
+    const arquivo = e.target.files[0];
+    if (arquivo) {
+      const leitor = new FileReader();
+      leitor.onloadend = () => {
+        setFoto(leitor.result);
       };
-      reader.readAsDataURL(file);
+      leitor.readAsDataURL(arquivo);
     }
   };
 
-  const inputStyle = {
+  const estiloInput = {
     padding: '12px',
     borderRadius: '6px',
     border: '1px solid #555',
@@ -44,34 +41,33 @@ const AddPlantForm = ({ onAddPlant }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px', maxWidth: '500px', margin: '10px auto' }}>
+    <form onSubmit={lidarComEnvio} style={{ display: 'flex', flexDirection: 'column', gap: '15px', maxWidth: '500px', margin: '10px auto' }}>
       
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <label style={{ color: '#333', marginBottom: '5px', fontWeight: 'bold' }}>Nome:</label>
-        <input type="text" placeholder="Ex: Orquídea" value={nome} onChange={(e) => setNome(e.target.value)} style={inputStyle} />
+        <input type="text" placeholder="Ex: Orquídea" value={nome} onChange={(e) => setNome(e.target.value)} style={estiloInput} />
       </div>
       
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <label style={{ color: '#333', marginBottom: '5px', fontWeight: 'bold' }}>Espécie:</label>
-        <input type="text" placeholder="Ex: Orchidaceae" value={especie} onChange={(e) => setEspecie(e.target.value)} style={inputStyle} />
+        <input type="text" placeholder="Ex: Orchidaceae" value={especie} onChange={(e) => setEspecie(e.target.value)} style={estiloInput} />
       </div>
 
-      {/* NOVO CAMPO SOBRE */}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <label style={{ color: '#333', marginBottom: '5px', fontWeight: 'bold' }}>Sobre a Planta:</label>
         <textarea 
           placeholder="Escreva detalhes sobre a planta..." 
           value={sobre} 
           onChange={(e) => setSobre(e.target.value)} 
-          style={{...inputStyle, height: '80px', resize: 'vertical'}} 
+          style={{...estiloInput, height: '80px', resize: 'vertical'}} 
         />
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <label style={{ color: '#333', marginBottom: '5px', fontWeight: 'bold' }}>Foto da Planta:</label>
-        <input id="fileInput" type="file" accept="image/*" onChange={handleFileChange} style={{...inputStyle, cursor: 'pointer'}} />
+        <input id="inputArquivo" type="file" accept="image/*" onChange={lidarComArquivo} style={{...estiloInput, cursor: 'pointer'}} />
         {foto && (
-            <img src={foto} alt="Preview" style={{ width: '100px', height: '100px', objectFit: 'cover', marginTop: '10px', borderRadius: '4px', border: '1px solid #ccc' }} />
+            <img src={foto} alt="Pré-visualização" style={{ width: '100px', height: '100px', objectFit: 'cover', marginTop: '10px', borderRadius: '4px', border: '1px solid #ccc' }} />
         )}
       </div>
       
@@ -83,4 +79,4 @@ const AddPlantForm = ({ onAddPlant }) => {
   );
 };
 
-export default AddPlantForm;
+export default FormularioAdicionar;
