@@ -1,7 +1,10 @@
 import React from 'react';
 
+// Esse é um componente de apresentação (Presenter). Ele foca apenas na interface visual.
+// Aqui recebe a função 'aoSelecionarPerfil' através de props para comunicar a escolha ao componente pai.
 const SeletorPerfil = ({ aoSelecionarPerfil }) => {
   return (
+    // Aqui é o container Principal. Ele usa o flexbox para centralizar tudo na tela de maneira vertical e horizontal. O return está mandando as configurações
     <div style={{ 
         display: 'flex', 
         flexDirection: 'column', 
@@ -26,11 +29,11 @@ const SeletorPerfil = ({ aoSelecionarPerfil }) => {
       }}>
         
         <h1 style={{ color: '#000', marginBottom: '20px', fontSize: '2.2rem' }}>
-          Bem-vindo ao Viveiro Digital 🌱
+          Seja bem vindo(a) ao viveiro.
         </h1>
         
         <p style={{ fontSize: '1.1em', color: '#555', marginBottom: '40px' }}>
-          Selecione seu perfil para continuar:
+          Escolha uma opção para prosseguir.
         </p>
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
