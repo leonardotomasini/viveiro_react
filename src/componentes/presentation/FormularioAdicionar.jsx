@@ -47,9 +47,9 @@ const FormularioAdicionar = ({ aoAdicionarPlanta }) => {
   const estiloInput = {
     padding: '12px',
     borderRadius: '6px',
-    border: '1px solid #555',
+    border: '1px solid #a8a2a2ff',
     backgroundColor: '#333', 
-    color: '#ffffff',     
+    color: '#ffffffff',     
     fontSize: '16px',
     outline: 'none'
   };
@@ -60,20 +60,20 @@ const FormularioAdicionar = ({ aoAdicionarPlanta }) => {
       {/* Campo para digitar o nome */}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <label style={{ color: '#333', marginBottom: '5px', fontWeight: 'bold' }}>Nome:</label>
-        <input type="text" placeholder="Ex: Orquídea" value={nome} onChange={(e) => setNome(e.target.value)} style={estiloInput} />
+        <input type="text" placeholder="Exemplo: Araucária" value={nome} onChange={(e) => setNome(e.target.value)} style={estiloInput} />
       </div>
       
       {/* Campo para digitar a espécie */}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <label style={{ color: '#333', marginBottom: '5px', fontWeight: 'bold' }}>Espécie:</label>
-        <input type="text" placeholder="Ex: Orchidaceae" value={especie} onChange={(e) => setEspecie(e.target.value)} style={estiloInput} />
+        <input type="text" placeholder="Exemplo: Araucariaceae" value={especie} onChange={(e) => setEspecie(e.target.value)} style={estiloInput} />
       </div>
 
       {/* Para escrever sobre as caracteristicas das plantas */}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <label style={{ color: '#333', marginBottom: '5px', fontWeight: 'bold' }}>Sobre a Planta:</label>
         <textarea 
-          placeholder="Escreva detalhes sobre a planta..." 
+          placeholder="Exemplo: Árvore conífera que pode atingir 40 metros" 
           value={sobre} 
           onChange={(e) => setSobre(e.target.value)} 
           style={{...estiloInput, height: '80px', resize: 'vertical'}} 

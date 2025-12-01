@@ -74,7 +74,7 @@ const GerenciadorPlantas = ({ perfil }) => {
         Viveiro Digital 
       </h1>
       <h2 style={{ color: '#000105ff', textAlign: 'center', marginBottom: '30px' }}>
-        Catálogo para adições e modificações das espécies
+        Catálogo das espécies disponiveis no momento.
       </h2>
       
       {/* Aqui funciona sob uma condição, caso seja selecionado como dono renderiza o componente de 
