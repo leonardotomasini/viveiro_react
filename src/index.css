@@ -89,6 +89,5 @@ input::placeholder, textarea::placeholder {
 
 
 body {
-  /* Altere esta cor para a cor desejada (ex: lightgray) */
-  background-color: #032711; /* Um cinza muito, muito claro */
+  background-color: #0f5a2c; 
 }
