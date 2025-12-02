@@ -32,7 +32,6 @@ function App() {
   }
 
   return (
-    // Aqui retorna o Wrapper principal da aplicação com estilo de fundo global.
     <div className="App" style={{ backgroundColor: '#f0fff0', minHeight: '100vh' }}>
       {conteudo}
     </div>

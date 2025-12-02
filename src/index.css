@@ -86,3 +86,9 @@ input::placeholder, textarea::placeholder {
   color: #c0c0c0 !important; 
   opacity: 1; 
 }
+
+
+body {
+  /* Altere esta cor para a cor desejada (ex: lightgray) */
+  background-color: #032711; /* Um cinza muito, muito claro */
+}
